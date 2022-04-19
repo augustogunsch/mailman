@@ -40,6 +40,7 @@ for mail in Path('scheduled').glob('*.mail'):
             msg['To'] = to_address
 
             smtp.send_message(msg)
-            mail.unlink()
+            os.makedirs('sent', exist_ok=True)
+            mail.rename(Path('sent') / mail.name)
 
 smtp.quit()

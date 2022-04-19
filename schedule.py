@@ -1,6 +1,7 @@
 #!/bin/python3.9
 import os, tempfile, subprocess, re, sys
 from datetime import datetime, timedelta
+from uuid import uuid4
 
 os.chdir(os.path.dirname(__file__))
 
@@ -29,11 +30,7 @@ if not to or not subject:
     print('ERROR: recipient or subject empty')
     exit(1)
 
-filename = f'scheduled/{to}:{subject}.mail'
-
-if os.path.exists(filename):
-    print('ERROR: an email for this recipient with the same subject is already scheduled')
-    exit(1)
+filename = f'scheduled/{to}:{subject.lower().replace(" ", "_")}.{uuid4().hex}.mail'
 
 with open(filename, 'w') as file:
     file.write(msg)
