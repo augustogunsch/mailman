@@ -21,7 +21,7 @@ for mail in Path('scheduled').glob('*.mail'):
         scheduled = re.findall(r'Scheduled to \(UTC\): (.*)\n', msg)[0]
         scheduled = datetime.fromisoformat(scheduled)
 
-        if scheduled <= datetime.now():
+        if scheduled <= datetime.utcnow():
             to_address = re.findall(r'To: (.*)\n', msg)[0]
             subject = re.findall(r'Subject: (.*)\n', msg)[0]
 
