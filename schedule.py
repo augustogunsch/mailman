@@ -10,7 +10,7 @@ EDITOR = os.environ.get('EDITOR', 'vim')
 os.makedirs('scheduled', exist_ok=True)
 
 tomorrow = datetime.utcnow() + timedelta(days=1)
-tomorrow = tomorrow.replace(microsecond=0, second=0, minute=int(tomorrow.minute/15))
+tomorrow = tomorrow.replace(microsecond=0, second=0, minute=15*int(tomorrow.minute/15))
 initial_msg = f'To: \nSubject: \nScheduled to (UTC): {tomorrow.isoformat()}\n---- Body ----'
 
 with tempfile.NamedTemporaryFile() as file:
